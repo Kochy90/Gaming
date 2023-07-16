@@ -1,7 +1,5 @@
-package com.gamingPlatform.service;
+package integration.com.gamingPlatform.service;
 
-import com.gamingPlatform.GamingPlatformApplication;
-import com.gamingPlatform.games.CommandToHigherOrLowerGameConverter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.Execution;
@@ -12,6 +10,9 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ContextConfiguration;
+import com.gamingPlatform.games.CommandToHigherOrLowerGameConverter;
+import com.gamingPlatform.service.CreateGameCommand;
+import com.gamingPlatform.service.GameService;
 
 import java.util.Map;
 

@@ -2,7 +2,6 @@ package com.gamingPlatform.games;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.stereotype.Component;
 
 @Data
 //@Component

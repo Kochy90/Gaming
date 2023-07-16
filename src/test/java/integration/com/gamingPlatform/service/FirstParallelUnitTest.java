@@ -1,4 +1,4 @@
-package com.gamingPlatform.service;
+package integration.com.gamingPlatform.service;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.Execution;
