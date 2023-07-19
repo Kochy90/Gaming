@@ -19,9 +19,6 @@ import javax.naming.NameNotFoundException;
 public class GameController {
 
     @Autowired
-    CreateGameCommand createGameCommand;
-
-    @Autowired
     GameService gameService;
 
     @PostMapping("/play")
