@@ -1,4 +1,4 @@
-package com.gamingPlatform;
+package com.gaming_platform;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package com.gamingPlatform.service;
+package com.gaming_platform.service;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
