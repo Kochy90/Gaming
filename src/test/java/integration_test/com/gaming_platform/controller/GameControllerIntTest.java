@@ -1,8 +1,8 @@
 package integration_test.com.gaming_platform.controller;
 
 import com.gaming_platform.GamingPlatformApplication;
+import com.gaming_platform.commands.CreateSinglePlayerSingleBetGameCommand;
 import com.gaming_platform.controller.GameController;
-import com.gaming_platform.service.CreateGameCommand;
 import com.gaming_platform.service.GameService;
 import integration_test.com.gaming_platform.IntegrationTestConstants;
 import org.junit.jupiter.api.Test;
@@ -29,7 +29,7 @@ public class GameControllerIntTest {
 
     @Test
     void testHigherOrLowerGamePlayMethod() {
-        CreateGameCommand command = IntegrationTestConstants.generateHigherOrLowerGameCommand(10.0, 99);
+        CreateSinglePlayerSingleBetGameCommand command = IntegrationTestConstants.generateHigherOrLowerGameCommand(10.0, 99);
         WebClient client = WebClient.create("http://localhost:" + port + "/game");
 
         ResponseEntity<Double> responseEntity = this.restTemplate.postForEntity("http://localhost:" + port + "/game/play", command, Double.class);
