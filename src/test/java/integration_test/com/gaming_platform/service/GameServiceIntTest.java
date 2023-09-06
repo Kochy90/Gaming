@@ -1,6 +1,7 @@
 package integration_test.com.gaming_platform.service;
 
 import com.gaming_platform.GamingPlatformApplication;
+import com.gaming_platform.result_dto.SinglePlayerSingleBetGameResult;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -20,7 +21,7 @@ import static integration_test.com.gaming_platform.IntegrationTestConstants.gene
 
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
-@ContextConfiguration(classes = { GameService.class, GamingPlatformApplication.class})
+@ContextConfiguration(classes = {GameService.class, GamingPlatformApplication.class})
 class GameServiceIntTest {
 
     @Autowired
@@ -34,16 +35,16 @@ class GameServiceIntTest {
         ExecutorService executor = Executors.newFixedThreadPool(24);
         final int NUMBER_OF_GAMES = 1000000;
 
-        List<Future<Double>> futures = new ArrayList<>();
+        List<Future<SinglePlayerSingleBetGameResult>> futures = new ArrayList<>();
 
         for (int i = 0; i < NUMBER_OF_GAMES; i++) {
-            Future<Double> future = executor.submit(() -> gameService.playGame(
+            Future<SinglePlayerSingleBetGameResult> future = executor.submit(() -> gameService.playGame(
                     generateHigherOrLowerGameCommand(DEFAULT_BET, RANDOM.nextInt(1, 100))));
             futures.add(future);
         }
         double sum = 0;
-        for (Future<Double> future : futures) {
-            sum += future.get();
+        for (Future<SinglePlayerSingleBetGameResult> future : futures) {
+            sum += future.get().getBetResult().getAmount();
         }
 
         executor.shutdown();

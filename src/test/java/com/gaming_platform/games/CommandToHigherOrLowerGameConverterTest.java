@@ -1,9 +1,10 @@
 package com.gaming_platform.games;
 
+import com.gaming_platform.commands.CreateSinglePlayerSingleBetGameCommand;
 import com.gaming_platform.converters.CommandToHigherOrLowerGameConverter;
 import com.gaming_platform.exceptions.InvalidFieldException;
 import com.gaming_platform.exceptions.ValueOutOfBoundsException;
-import com.gaming_platform.service.CreateGameCommand;
+import com.gaming_platform.games.single_player.single_bet.higher_or_lower.HigherOrLower;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static com.gaming_platform.UnitTestConstants.generateHigherOrLowerGameCommand;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 class CommandToHigherOrLowerGameConverterTest {
@@ -22,9 +24,9 @@ class CommandToHigherOrLowerGameConverterTest {
 
     @Test
     void buildHigherOrLowerGameFromCommand() throws ValueOutOfBoundsException, InvalidFieldException {
-        CreateGameCommand command = generateHigherOrLowerGameCommand(50d, 85);
+        CreateSinglePlayerSingleBetGameCommand command = generateHigherOrLowerGameCommand(50d, 85);
 
-        com.gaming_platform.games.HigherOrLower game = (com.gaming_platform.games.HigherOrLower) converter.build(command.getGameVariables());
+        HigherOrLower game = (HigherOrLower) converter.build(command.getGameVariables());
         assertAll("game",
                 () -> assertEquals(50.0, game.getBet()),
                 () -> assertEquals(85, game.getPlayersNumber())
@@ -33,7 +35,7 @@ class CommandToHigherOrLowerGameConverterTest {
 
     @Test
     void buildHigherOrLowerGameFromCommandDoesNotValidateBet() {
-        CreateGameCommand command = generateHigherOrLowerGameCommand(-200d, 85);
+        CreateSinglePlayerSingleBetGameCommand command = generateHigherOrLowerGameCommand(-200d, 85);
 
         ValueOutOfBoundsException thrown = Assertions.assertThrows(ValueOutOfBoundsException.class, () -> converter.build(command.getGameVariables()));
 
@@ -43,7 +45,7 @@ class CommandToHigherOrLowerGameConverterTest {
 
     @Test
     void buildHigherOrLowerGameFromCommandDoesNotValidatePlayersNumberTooLow() {
-        CreateGameCommand command = generateHigherOrLowerGameCommand(50.5d, 0);
+        CreateSinglePlayerSingleBetGameCommand command = generateHigherOrLowerGameCommand(50.5d, 0);
 
         ValueOutOfBoundsException thrown = Assertions.assertThrows(ValueOutOfBoundsException.class, () -> converter.build(command.getGameVariables()));
 
@@ -53,7 +55,7 @@ class CommandToHigherOrLowerGameConverterTest {
 
     @Test
     void buildHigherOrLowerGameFromCommandDoesNotValidatePlayersNumberTooHigh() {
-        CreateGameCommand command = generateHigherOrLowerGameCommand(50.5d, 101);
+        CreateSinglePlayerSingleBetGameCommand command = generateHigherOrLowerGameCommand(50.5d, 101);
 
         ValueOutOfBoundsException thrown = Assertions.assertThrows(ValueOutOfBoundsException.class, () -> converter.build(command.getGameVariables()));
 
@@ -63,7 +65,7 @@ class CommandToHigherOrLowerGameConverterTest {
 
     @Test
     void buildHigherOrLowerGameFromCommandThrowsExceptionWhenBetKeyNotPresent() {
-        CreateGameCommand command = new CreateGameCommand("HIGHER_OR_LOWER", Map.of("playersNumber", 50));
+        CreateSinglePlayerSingleBetGameCommand command = generateHigherOrLowerGameCommand(Map.of("playersNumber", 50));
 
         InvalidFieldException thrown = Assertions.assertThrows(InvalidFieldException.class, () -> converter.build(command.getGameVariables()));
 
@@ -73,7 +75,7 @@ class CommandToHigherOrLowerGameConverterTest {
 
     @Test
     void buildHigherOrLowerGameFromCommandThrowsExceptionWhenPlayersNumberNotPresent() {
-        CreateGameCommand command = new CreateGameCommand("HIGHER_OR_LOWER", Map.of("bet", 50.0d));
+        CreateSinglePlayerSingleBetGameCommand command = generateHigherOrLowerGameCommand(Map.of("bet", 50.0d));
 
         InvalidFieldException thrown = Assertions.assertThrows(InvalidFieldException.class, () -> converter.build(command.getGameVariables()));
 

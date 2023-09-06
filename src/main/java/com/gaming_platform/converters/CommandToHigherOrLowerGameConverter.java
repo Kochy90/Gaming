@@ -3,8 +3,8 @@ package com.gaming_platform.converters;
 import com.gaming_platform.exceptions.InvalidFieldException;
 import com.gaming_platform.exceptions.ValueOutOfBoundsException;
 import com.gaming_platform.games.Game;
-import com.gaming_platform.games.HigherOrLower;
-import com.gaming_platform.games.IPlayable;
+import com.gaming_platform.games.single_player.single_bet.higher_or_lower.HigherOrLower;
+import com.gaming_platform.games.ISinglePlayerSingleBetPlayable;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Component;
@@ -19,7 +19,7 @@ public class CommandToHigherOrLowerGameConverter implements IGameConverter {
     private static final String PLAYERS_NUMBER = "playersNumber";
 
     @Override
-    public IPlayable build(Map<String, Object> mapOfGameVariables) throws ValueOutOfBoundsException, InvalidFieldException {
+    public ISinglePlayerSingleBetPlayable build(Map<String, Object> mapOfGameVariables) throws ValueOutOfBoundsException, InvalidFieldException {
         validateGameVariables(mapOfGameVariables);
         return new HigherOrLower((double) mapOfGameVariables.get(BET), (int) mapOfGameVariables.get(PLAYERS_NUMBER));
     }
