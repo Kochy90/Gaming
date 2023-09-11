@@ -25,7 +25,12 @@ public class CommandToRouletteGameConverter implements IMultiPlayerMultiBetGameC
         return game == Game.ROULETTE;
     }
 
-    public IMultiPlayerMultiBetPlayable build(CreateMultiPlayerMultiBetGameCommand gameCommand) throws InvalidPlayerException {
+    /*
+     I personally dont find an issue to have more than one converter/builder/factory/mapper package in different levels of the app,
+      since it seems reasonable to me that there may be different conversions between layers, (for example one from controller -> service, another from service -> repository)
+
+     */
+     public IMultiPlayerMultiBetPlayable build(CreateMultiPlayerMultiBetGameCommand gameCommand) throws InvalidPlayerException {
         List<RoulettePlayer> roulettePlayers = new ArrayList<>();
 
         for (CreatePlayerCommand player : gameCommand.getCreatePlayerCommands()) {

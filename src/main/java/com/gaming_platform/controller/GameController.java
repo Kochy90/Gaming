@@ -32,6 +32,7 @@ public class GameController {
     public ResponseEntity<MultiPlayerMultiBetGameResult> playGame(@RequestBody CreateMultiPlayerMultiBetGameCommand createGameCommand)
             throws NameNotFoundException, GameTypeNotConvertibleException, ValueOutOfBoundsException, InvalidFieldException, InvalidPlayerException {
         MultiPlayerMultiBetGameResult result = gameService.playGame(createGameCommand);
+        // Sometimes it is considered a good practice to not pass directly the object you receive to the service, it is not like I am an expert myself but for what I know some of those principles are set in clean architecture by R Martin
         return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
     }
 
