@@ -1,15 +1,15 @@
 package com.gaming_platform.games.multi_player.multi_bet.roulette.model.rouletteBet;
 
 import com.gaming_platform.exceptions.IncorrectBetTypeException;
-import com.gaming_platform.games.multi_player.multi_bet.roulette.model.RouletteBet;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.util.Set;
 
 /**
- *  Simple. You’re making a bet on whether a red number or a black number will win. These are marked “red” or “black” on the table.
+ *  Simple. You’re making a Bet on whether a red number or a black number will win. These are marked “red” or “black” on the table.
  * <p> </p>
- *  This is an even money bet (1:1). But because of the 0 or 00 on the wheel – neither of which are black OR red – your odds of winning are less than 50/50.
+ *  This is an even money Bet (1:1). But because of the 0 or 00 on the wheel – neither of which are black OR red – your odds of winning are less than 50/50.
  *  This is where the casino gets their advantage.
  */
 
@@ -17,11 +17,12 @@ import java.util.Set;
 public class RedBlackRouletteBet extends RouletteBet {
 
     public static final String betName = RouletteBetType.RED_BLACK.name();
-    private static final int payout = 1;
+    private final int payout = 2;
     private final String bet;
 
-    public RedBlackRouletteBet(double amount, long betId, String bet) {
-        super(amount, betId);
+    @Builder
+    public RedBlackRouletteBet(long betId, long playerId, long gameId, double amount, String bet) {
+        super(betId, playerId, gameId, amount);
         this.bet = bet;
     }
 

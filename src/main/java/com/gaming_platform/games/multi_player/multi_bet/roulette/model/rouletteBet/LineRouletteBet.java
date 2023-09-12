@@ -1,6 +1,7 @@
 package com.gaming_platform.games.multi_player.multi_bet.roulette.model.rouletteBet;
 
 import com.gaming_platform.exceptions.IncorrectBetTypeException;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.util.List;
@@ -17,11 +18,12 @@ import java.util.List;
 public class LineRouletteBet extends RouletteBet {
 
     public static final String betName = RouletteBetType.LINE.name();
-    private static final int payout = 5;
+    private final int payout = 5;
     private final List<Integer> bet;
 
-    public LineRouletteBet(double amount, long betId, List<Integer> bet) {
-        super(amount, betId);
+    @Builder
+    public LineRouletteBet(long betId, long playerId, long gameId, double amount, List<Integer> bet) {
+        super(betId, playerId, gameId, amount);
         this.bet = bet;
     }
 

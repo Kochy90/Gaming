@@ -1,13 +1,11 @@
 package com.gaming_platform.controller;
 
 import com.gaming_platform.commands.CreateMultiPlayerMultiBetGameCommand;
-import com.gaming_platform.commands.CreateSinglePlayerSingleBetGameCommand;
 import com.gaming_platform.exceptions.GameTypeNotConvertibleException;
 import com.gaming_platform.exceptions.InvalidFieldException;
 import com.gaming_platform.exceptions.InvalidPlayerException;
 import com.gaming_platform.exceptions.ValueOutOfBoundsException;
 import com.gaming_platform.result_dto.MultiPlayerMultiBetGameResult;
-import com.gaming_platform.result_dto.SinglePlayerSingleBetGameResult;
 import com.gaming_platform.service.GameService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,12 +33,12 @@ public class GameController {
         return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
     }
 
-    @PostMapping("/spsb/play")
-    public ResponseEntity<SinglePlayerSingleBetGameResult> playGame(@RequestBody CreateSinglePlayerSingleBetGameCommand createGameCommand)
-            throws NameNotFoundException, GameTypeNotConvertibleException, ValueOutOfBoundsException, InvalidFieldException, InvalidPlayerException {
-        SinglePlayerSingleBetGameResult result = gameService.playGame(createGameCommand);
-        return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
-    }
+//    @PostMapping("/spsb/play")
+//    public ResponseEntity<SinglePlayerSingleBetGameResult> playGame(@RequestBody CreateSinglePlayerSingleBetGameCommand createGameCommand)
+//            throws NameNotFoundException, GameTypeNotConvertibleException, ValueOutOfBoundsException, InvalidFieldException, InvalidPlayerException {
+//        SinglePlayerSingleBetGameResult result = gameService.playGame(createGameCommand);
+//        return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
+//    }
 
 }
 

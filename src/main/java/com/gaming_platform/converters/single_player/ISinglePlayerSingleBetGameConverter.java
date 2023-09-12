@@ -1,4 +1,4 @@
-package com.gaming_platform.converters;
+package com.gaming_platform.converters.single_player;
 
 import com.gaming_platform.commands.CreateSinglePlayerSingleBetGameCommand;
 import com.gaming_platform.exceptions.InvalidFieldException;
