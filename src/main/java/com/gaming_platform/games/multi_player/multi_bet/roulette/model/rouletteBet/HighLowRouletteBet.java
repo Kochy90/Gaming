@@ -1,6 +1,7 @@
 package com.gaming_platform.games.multi_player.multi_bet.roulette.model.rouletteBet;
 
 import com.gaming_platform.exceptions.IncorrectBetTypeException;
+import lombok.Builder;
 import lombok.Getter;
 
 /**
@@ -12,11 +13,12 @@ import lombok.Getter;
 public class HighLowRouletteBet extends RouletteBet {
 
     public static final String betName = RouletteBetType.HIGH_LOW.name();
-    private static final int payout = 1;
+    private final int payout = 2;
     private final String bet;
 
-    public HighLowRouletteBet(double amount, long betId, String bet) {
-        super(amount, betId);
+    @Builder
+    public HighLowRouletteBet(long betId, long playerId, long gameId, double amount, String bet) {
+        super(betId, playerId, gameId, amount);
         this.bet = bet;
     }
 

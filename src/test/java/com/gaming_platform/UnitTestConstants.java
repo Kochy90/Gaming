@@ -9,7 +9,7 @@ import java.util.Random;
 public class UnitTestConstants {
 
     public static CreateSinglePlayerSingleBetGameCommand generateHigherOrLowerGameCommand(Double bet, Integer playersNumber) {
-        return new CreateSinglePlayerSingleBetGameCommand(Game.HIGHER_OR_LOWER.name(), new Random().nextLong(), Map.of("bet", bet, "playersNumber", playersNumber));
+        return new CreateSinglePlayerSingleBetGameCommand(Game.HIGHER_OR_LOWER.name(), new Random().nextLong(), Map.of("Bet", bet, "playersNumber", playersNumber));
     }
 
     public static CreateSinglePlayerSingleBetGameCommand generateHigherOrLowerGameCommand(Map<String, Object> mapOfInputGameVariables) {
