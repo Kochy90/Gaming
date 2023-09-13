@@ -10,5 +10,6 @@ import java.util.Map;
 public class CreateSinglePlayerSingleBetGameCommand {
     private String gameName;
     private Long playerId;
+    private CreateSingleBetPlayerCommand createSingleBetPlayerCommand;
     private Map<String, Object> gameVariables;
 }

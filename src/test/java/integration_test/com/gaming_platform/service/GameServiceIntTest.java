@@ -7,7 +7,7 @@
 //import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 //import org.springframework.boot.test.context.SpringBootTest;
 //import org.springframework.test.context.ContextConfiguration;
-//import com.gaming_platform.service.GameService;
+//import com.gaming_platform.core.service.MultiPlayerMultiBetGameService;
 //
 //import java.util.ArrayList;
 //import java.util.List;
@@ -21,11 +21,11 @@
 //
 //@SpringBootTest
 //@AutoConfigureMockMvc(addFilters = false)
-//@ContextConfiguration(classes = {GameService.class, GamingPlatformApplication.class})
+//@ContextConfiguration(classes = {MultiPlayerMultiBetGameService.class, GamingPlatformApplication.class})
 //class GameServiceIntTest {
 //
 //    @Autowired
-//    private GameService gameService;
+//    private MultiPlayerMultiBetGameService gameService;
 //
 //    public static final double DEFAULT_BET = 10.0d;
 //    public static final Random RANDOM = new Random();

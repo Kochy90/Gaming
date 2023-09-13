@@ -1,12 +1,15 @@
 package com.gaming_platform.controller;
 
 import com.gaming_platform.commands.CreateMultiPlayerMultiBetGameCommand;
+import com.gaming_platform.commands.CreateSinglePlayerSingleBetGameCommand;
+import com.gaming_platform.core.service.MultiPlayerMultiBetGameService;
+import com.gaming_platform.core.service.SinglePlayerSingleBetGameService;
 import com.gaming_platform.exceptions.GameTypeNotConvertibleException;
 import com.gaming_platform.exceptions.InvalidFieldException;
 import com.gaming_platform.exceptions.InvalidPlayerException;
 import com.gaming_platform.exceptions.ValueOutOfBoundsException;
 import com.gaming_platform.result_dto.MultiPlayerMultiBetGameResult;
-import com.gaming_platform.service.GameService;
+import com.gaming_platform.result_dto.SinglePlayerSingleBetGameResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,21 +27,24 @@ import javax.naming.NameNotFoundException;
 public class GameController {
 
     @Autowired
-    GameService gameService;
+    MultiPlayerMultiBetGameService multiPlayerMultiBetGameService;
+
+    @Autowired
+    SinglePlayerSingleBetGameService singlePlayerSingleBetGameService;
 
     @PostMapping("/mpmb/play")
     public ResponseEntity<MultiPlayerMultiBetGameResult> playGame(@RequestBody CreateMultiPlayerMultiBetGameCommand createGameCommand)
             throws NameNotFoundException, GameTypeNotConvertibleException, ValueOutOfBoundsException, InvalidFieldException, InvalidPlayerException {
-        MultiPlayerMultiBetGameResult result = gameService.playGame(createGameCommand);
+        MultiPlayerMultiBetGameResult result = multiPlayerMultiBetGameService.playGame(createGameCommand);
         return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
     }
 
-//    @PostMapping("/spsb/play")
-//    public ResponseEntity<SinglePlayerSingleBetGameResult> playGame(@RequestBody CreateSinglePlayerSingleBetGameCommand createGameCommand)
-//            throws NameNotFoundException, GameTypeNotConvertibleException, ValueOutOfBoundsException, InvalidFieldException, InvalidPlayerException {
-//        SinglePlayerSingleBetGameResult result = gameService.playGame(createGameCommand);
-//        return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
-//    }
+    @PostMapping("/spsb/play")
+    public ResponseEntity<SinglePlayerSingleBetGameResult> playGame(@RequestBody CreateSinglePlayerSingleBetGameCommand createGameCommand)
+            throws NameNotFoundException, GameTypeNotConvertibleException, ValueOutOfBoundsException, InvalidFieldException, InvalidPlayerException {
+        SinglePlayerSingleBetGameResult result = singlePlayerSingleBetGameService.playGame(createGameCommand);
+        return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
+    }
 
 }
 

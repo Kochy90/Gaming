@@ -9,5 +9,5 @@ import java.util.List;
 @AllArgsConstructor
 public class CreateMultiPlayerMultiBetGameCommand {
     private String gameName;
-    private List<CreatePlayerCommand> createPlayerCommands;
+    private List<CreateMultiBetPlayerCommand> createMultiBetPlayerCommands;
 }
