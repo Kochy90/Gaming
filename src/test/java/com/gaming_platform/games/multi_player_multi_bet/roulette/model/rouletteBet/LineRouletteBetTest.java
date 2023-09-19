@@ -12,14 +12,14 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class StreetRouletteGameTypeBetTest {
+class LineRouletteBetTest {
 
     Long gameId;
     Long playerId;
     Long betId;
     Double amount;
-    StreetRouletteBet.StreetRouletteBetBuilder streetRouletteBetBuilder;
-    final int STREET_ROULETTE_PAYOUT = 11;
+    LineRouletteBet.LineRouletteBetBuilder lineRouletteBetBuilder;
+    final int LINE_ROULETTE_PAYOUT = 5;
 
     @BeforeEach
     void setup() {
@@ -27,30 +27,30 @@ class StreetRouletteGameTypeBetTest {
         playerId = 2L;
         betId = 3L;
         amount = 50d;
-        streetRouletteBetBuilder = StreetRouletteBet.builder().gameId(gameId).playerId(playerId).betId(betId).amount(amount);
+        lineRouletteBetBuilder = LineRouletteBet.builder().gameId(gameId).playerId(playerId).betId(betId).amount(amount);
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {1, 2, 3})
-    public void betResultContainsCorrectAmountWhenStreetRouletteBetWins(int roll) throws IncorrectBetTypeException {
-        List<Integer> bet = List.of(1, 2, 3);
-        Bet streetRouletteBet = streetRouletteBetBuilder.bet(bet).build();
+    @ValueSource(ints = {1, 2, 3, 4, 5, 6})
+    public void betResultContainsCorrectAmountWhenLineRouletteBetWins(int roll) throws IncorrectBetTypeException {
+        List<Integer> bet = List.of(1, 2, 3, 4, 5, 6);
+        Bet lineRouletteBet = lineRouletteBetBuilder.bet(bet).build();
 
-        BetResult betResult = streetRouletteBet.getResult(roll);
+        BetResult betResult = lineRouletteBet.getResult(roll);
 
         assertAll("betResult",
                 () -> assertEquals(betId, betResult.getBetId()),
-                () -> assertEquals(amount * STREET_ROULETTE_PAYOUT, betResult.getAmount())
+                () -> assertEquals(amount * LINE_ROULETTE_PAYOUT, betResult.getAmount())
         );
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {10 ,11, 12})
-    public void betResultContainsCorrectAmountWhenStreetRouletteBetLoses(int roll) throws IncorrectBetTypeException {
-        List<Integer> bet = List.of(4, 5, 6);
-        Bet streetRouletteBet = streetRouletteBetBuilder.bet(bet).build();
+    @ValueSource(ints = {7, 8, 9, 10 ,11, 12})
+    public void betResultContainsCorrectAmountWhenLineRouletteBetLoses(int roll) throws IncorrectBetTypeException {
+        List<Integer> bet = List.of(1, 2, 3, 4, 5, 6);
+        Bet lineRouletteBet = lineRouletteBetBuilder.bet(bet).build();
 
-        BetResult betResult = streetRouletteBet.getResult(roll);
+        BetResult betResult = lineRouletteBet.getResult(roll);
 
         assertAll("betResult",
                 () -> assertEquals(betId, betResult.getBetId()),

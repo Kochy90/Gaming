@@ -9,7 +9,7 @@ import com.gaming_platform.exceptions.InvalidPlayerException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class CommandToMultiBetPlayerConverter<T extends MultiBetPlayer<S>, S extends Bet> implements IMultiBetPlayerConverter<S> {
+public abstract class CommandToMultiBetPlayerConverter<T extends MultiBetPlayer<S>, S extends Bet> implements IMultiBetPlayerConverter<T, S> {
 
     @Override
     public T convertCommandToMultiBetPlayer(Long gameId, CreateMultiBetPlayerCommand playerCommand) throws InvalidPlayerException {

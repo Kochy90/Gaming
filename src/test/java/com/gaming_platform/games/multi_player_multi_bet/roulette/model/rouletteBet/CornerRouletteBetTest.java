@@ -13,14 +13,14 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class SplitRouletteGameTypeBetTest {
+class CornerRouletteBetTest {
 
     Long gameId;
     Long playerId;
     Long betId;
     Double amount;
-    SplitRouletteBet.SplitRouletteBetBuilder splitRouletteBetBuilder;
-    final int SPLIT_ROULETTE_PAYOUT = 17;
+    CornerRouletteBet.CornerRouletteBetBuilder cornerRouletteBetBuilder;
+    final int CORNER_ROULETTE_PAYOUT = 8;
 
     @BeforeEach
     void setup() {
@@ -28,29 +28,29 @@ class SplitRouletteGameTypeBetTest {
         playerId = 2L;
         betId = 3L;
         amount = 50d;
-        splitRouletteBetBuilder = SplitRouletteBet.builder().gameId(gameId).playerId(playerId).betId(betId).amount(amount);
+        cornerRouletteBetBuilder = CornerRouletteBet.builder().gameId(gameId).playerId(playerId).betId(betId).amount(amount);
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {5, 8})
-    public void betResultContainsCorrectAmountWhenSplitRouletteBetWins(int roll) throws IncorrectBetTypeException {
-        List<Integer> bet = List.of(5, 8);
-        Bet splitRouletteBet = splitRouletteBetBuilder.bet(bet).build();
+    @ValueSource(ints = {1, 2, 4, 5})
+    public void betResultContainsCorrectAmountWhenCornerRouletteBetWins(int roll) throws IncorrectBetTypeException {
+        List<Integer> bet = List.of(1, 2, 4, 5);
+        Bet cornerRouletteBet = cornerRouletteBetBuilder.bet(bet).build();
 
-        BetResult betResult = splitRouletteBet.getResult(roll);
+        BetResult betResult = cornerRouletteBet.getResult(roll);
 
         assertAll("betResult",
                 () -> assertEquals(betId, betResult.getBetId()),
-                () -> assertEquals(amount * SPLIT_ROULETTE_PAYOUT, betResult.getAmount())
+                () -> assertEquals(amount * CORNER_ROULETTE_PAYOUT, betResult.getAmount())
         );
     }
 
     @Test
-    public void betResultContainsZeroAmountWhenSplitRouletteBetLoses() throws IncorrectBetTypeException {
-        List<Integer> bet = List.of(5, 8);
-        Bet splitRouletteBet = splitRouletteBetBuilder.bet(bet).build();
+    public void betResultContainsZeroAmountWhenCornerRouletteBetLoses() throws IncorrectBetTypeException {
+        List<Integer> bet = List.of(1, 2, 4, 5);
+        Bet cornerRouletteBet = cornerRouletteBetBuilder.bet(bet).build();
 
-        BetResult betResult = splitRouletteBet.getResult(0);
+        BetResult betResult = cornerRouletteBet.getResult(0);
 
         assertAll("betResult",
                 () -> assertEquals(betId, betResult.getBetId()),

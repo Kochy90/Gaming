@@ -9,7 +9,7 @@ import java.util.Random;
 
 @Getter
 @AllArgsConstructor
-public class SinglePlayerSingleBetGame<T extends SingleBetPlayer<S>, S extends Bet> {
+public abstract class SinglePlayerSingleBetGame<T extends SingleBetPlayer<S>, S extends Bet> {
     protected static final Random RANDOM = new Random();
     protected final Long gameId = RANDOM.nextLong();
     protected T player;

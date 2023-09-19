@@ -32,5 +32,4 @@ public abstract class SinglePlayerSingleBetPlayableService<T extends SinglePlaye
         }
     }
 
-
 }

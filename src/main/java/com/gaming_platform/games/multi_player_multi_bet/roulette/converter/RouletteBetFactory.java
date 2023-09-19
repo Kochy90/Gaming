@@ -3,11 +3,11 @@ package com.gaming_platform.games.multi_player_multi_bet.roulette.converter;
 import com.gaming_platform.commands.CreateBetCommand;
 import com.gaming_platform.exceptions.InvalidFieldException;
 import com.gaming_platform.games.multi_player_multi_bet.roulette.model.rouletteBet.*;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+@Service
 public class RouletteBetFactory {
 
     public RouletteBet buildRouletteBet(Long gameId, Long playerId, CreateBetCommand command) throws InvalidFieldException {
@@ -44,7 +44,6 @@ public class RouletteBetFactory {
         } else {
             throw new InvalidFieldException("incorrect object type for odd/even roulette Bet");
         }
-
     }
 
     private RedBlackRouletteBet validateAndBuildRedBlackRouletteBet(Long gameId, Long playerId, CreateBetCommand command) throws InvalidFieldException {

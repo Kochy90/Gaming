@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class FiveNumberRouletteGameTypeBetTest {
+class FiveNumberRouletteBetTest {
 
     Long gameId;
     Long playerId;
