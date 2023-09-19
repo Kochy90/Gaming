@@ -8,7 +8,7 @@ public class StraightRouletteBet extends RouletteBet {
 
     public static final String betName = RouletteBetType.STRAIGHT.name();
     private final int payout = 35;
-    private final int bet;
+    private final Integer bet;
 
     @Builder
     public StraightRouletteBet(long betId, long playerId, long gameId, double amount, int bet) {
