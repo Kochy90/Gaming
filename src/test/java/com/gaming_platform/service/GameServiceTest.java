@@ -15,7 +15,7 @@
 //class GameServiceTest {
 //
 //    @Autowired
-//    private GameService gameService;
+//    private MultiPlayerMultiBetGameService gameService;
 //
 //    @Test
 //    void gameServicePlayThrowsExceptionWhenGameNameNotFound() {

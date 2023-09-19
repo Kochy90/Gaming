@@ -4,7 +4,7 @@
 //import com.gaming_platform.games.single_player.single_bet.higher_or_lower.converter.CommandToHigherOrLowerGameConverter;
 //import com.gaming_platform.exceptions.InvalidFieldException;
 //import com.gaming_platform.exceptions.ValueOutOfBoundsException;
-//import com.gaming_platform.games.single_player.single_bet.higher_or_lower.HigherOrLower;
+//import com.gaming_platform.games.single_player.single_bet.higher_or_lower.model.HigherOrLowerGame;
 //import org.junit.jupiter.api.Assertions;
 //import org.junit.jupiter.api.Test;
 //import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@
 //    void buildHigherOrLowerGameFromCommand() throws ValueOutOfBoundsException, InvalidFieldException {
 //        CreateSinglePlayerSingleBetGameCommand command = generateHigherOrLowerGameCommand(50d, 85);
 //
-//        HigherOrLower game = (HigherOrLower) converter.build(command.getGameVariables());
+//        HigherOrLowerGame game = (HigherOrLowerGame) converter.build(command.getGameVariables());
 //        assertAll("game",
 //                () -> assertEquals(50.0, game.getBet()),
 //                () -> assertEquals(85, game.getPlayersNumber())
