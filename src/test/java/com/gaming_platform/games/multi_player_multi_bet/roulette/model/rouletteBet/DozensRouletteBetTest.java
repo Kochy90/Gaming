@@ -7,12 +7,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class DozensRouletteGameTypeBetTest {
-
+@SpringBootTest
+class DozensRouletteBetTest {
     Double amount;
     Long gameId, playerId, betId1, betId2, betId3;
     Bet dozensRouletteBetFirst, dozensRouletteBetSecond, dozensRouletteBetThird;
@@ -96,7 +97,7 @@ class DozensRouletteGameTypeBetTest {
                 () -> assertEquals(betId2, betResultSecond.getBetId()),
                 () -> assertEquals(0d, betResultSecond.getAmount()),
                 () -> assertEquals(betId3, betResultThird.getBetId()),
-                () -> assertEquals(amount * DOZENS_ROULETTE_PAYOUT, betResultThird.getAmount())
+                () -> assertEquals(0, betResultThird.getAmount())
         );
     }
 

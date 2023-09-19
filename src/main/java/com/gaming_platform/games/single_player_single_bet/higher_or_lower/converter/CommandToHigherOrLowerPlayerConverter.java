@@ -9,9 +9,9 @@ import com.gaming_platform.exceptions.ValueOutOfBoundsException;
 import com.gaming_platform.games.single_player_single_bet.higher_or_lower.model.HigherOrLowerBet;
 import com.gaming_platform.games.single_player_single_bet.higher_or_lower.model.HigherOrLowerPlayer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class CommandToHigherOrLowerPlayerConverter extends CommandToSingleBetPlayerConverter<HigherOrLowerPlayer, HigherOrLowerBet> {
 
     @Autowired
@@ -24,7 +24,7 @@ public class CommandToHigherOrLowerPlayerConverter extends CommandToSingleBetPla
         }
 
         if (playerCommand.getCreateBetCommand() == null) {
-            throw new InvalidPlayerException("Player's Higher or Lower bet missing'");
+            throw new InvalidPlayerException("Player's Higher or Lower bet missing");
         }
     }
 

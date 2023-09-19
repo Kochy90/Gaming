@@ -5,12 +5,13 @@ import com.gaming_platform.exceptions.IncorrectBetTypeException;
 import com.gaming_platform.result_dto.BetResult;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class StraightRouletteGameTypeBetTest {
-
+@SpringBootTest
+class StraightRouletteBetTest {
     Long gameId;
     Long playerId;
     Long betId;

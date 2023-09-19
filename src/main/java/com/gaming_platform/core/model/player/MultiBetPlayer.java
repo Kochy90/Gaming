@@ -8,7 +8,7 @@ import java.util.List;
 
 @Getter
 @AllArgsConstructor
-public class MultiBetPlayer<T extends Bet> {
+public abstract class MultiBetPlayer<T extends Bet> {
     private final Long playerId;
     private final List<T> bets;
 }

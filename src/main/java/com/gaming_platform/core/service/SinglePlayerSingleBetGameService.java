@@ -12,6 +12,7 @@ import com.gaming_platform.result_dto.SinglePlayerSingleBetGameResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.naming.NameNotFoundException;
 import java.util.Arrays;
@@ -27,9 +28,10 @@ public class SinglePlayerSingleBetGameService<T extends SinglePlayerSingleBetGam
     @Autowired
     private List<ISinglePlayerSingleBetPlayable<T, S, U>> singlePlayerSingleBetPlayableServices;
 
+    @ResponseBody
     public SinglePlayerSingleBetGameResult playGame(CreateSinglePlayerSingleBetGameCommand createGameCommand)
             throws NameNotFoundException, GameTypeNotConvertibleException, InvalidPlayerException {
-        GameType gameType = validateAndReturnGame(createGameCommand.getGameName());
+        GameType gameType = validateAndReturnGame(createGameCommand.getGameType());
         T singlePlayerGame = convertCommandToGame(gameType, createGameCommand);
         ISinglePlayerSingleBetPlayable<T, S, U> playableService = allocateGameService(gameType);
 

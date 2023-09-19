@@ -6,14 +6,15 @@ import com.gaming_platform.result_dto.BetResult;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class StreetRouletteGameTypeBetTest {
-
+@SpringBootTest
+class StreetRouletteBetTest {
     Long gameId;
     Long playerId;
     Long betId;

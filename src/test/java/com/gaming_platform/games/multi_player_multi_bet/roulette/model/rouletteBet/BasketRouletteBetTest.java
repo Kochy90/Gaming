@@ -12,8 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-class BasketRouletteGameTypeBetTest {
-
+class BasketRouletteBetTest {
     Long gameId;
     Long playerId;
     Long betId;

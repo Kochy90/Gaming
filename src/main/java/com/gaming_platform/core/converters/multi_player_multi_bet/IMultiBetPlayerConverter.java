@@ -5,7 +5,7 @@ import com.gaming_platform.core.model.bet.Bet;
 import com.gaming_platform.core.model.player.MultiBetPlayer;
 import com.gaming_platform.exceptions.InvalidPlayerException;
 
-public interface IMultiBetPlayerConverter<T extends Bet> {
+public interface IMultiBetPlayerConverter<T extends MultiBetPlayer<S>, S extends Bet> {
 
-    MultiBetPlayer<T> convertCommandToMultiBetPlayer(Long gameId, CreateMultiBetPlayerCommand playerCommand) throws InvalidPlayerException;
+    T convertCommandToMultiBetPlayer(Long gameId, CreateMultiBetPlayerCommand playerCommand) throws InvalidPlayerException;
 }

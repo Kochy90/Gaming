@@ -8,9 +8,9 @@ import com.gaming_platform.games.multi_player_multi_bet.roulette.model.RouletteG
 import com.gaming_platform.games.multi_player_multi_bet.roulette.model.RoulettePlayer;
 import com.gaming_platform.games.multi_player_multi_bet.roulette.model.rouletteBet.RouletteBet;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class CommandToRouletteGameConverter extends CommandToMultiPlayerMultiBetGameConverter<RouletteGame, RoulettePlayer, RouletteBet> {
 
     @Autowired
