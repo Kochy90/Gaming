@@ -6,18 +6,20 @@ import com.gaming_platform.result_dto.BetResult;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class SnakeRouletteGameTypeBetTest {
+@SpringBootTest
+class BasketRouletteBetTest {
 
     Long gameId;
     Long playerId;
     Long betId;
     Double amount;
-    Bet snakeRouletteBet;
-    final int SNAKE_ROULETTE_PAYOUT = 2;
+    Bet basketRouletteBet;
+    final int BASKET_ROULETTE_PAYOUT = 6;
 
     @BeforeEach
     void setUp() {
@@ -25,32 +27,29 @@ class SnakeRouletteGameTypeBetTest {
         playerId = 2L;
         betId = 3L;
         amount = 50d;
-        snakeRouletteBet = SnakeRouletteBet.builder().gameId(gameId).playerId(playerId).betId(betId).amount(amount).build();
+        basketRouletteBet = BasketRouletteBet.builder().gameId(gameId).playerId(playerId).betId(betId).amount(amount).build();
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {1, 5, 9, 12, 14, 16, 19, 23, 27, 30, 32, 34})
-    public void betResultContainsCorrectAmountWhenSnakeRouletteBetWins(int roll) throws IncorrectBetTypeException {
-
-        BetResult betResult = snakeRouletteBet.getResult(roll);
+    @ValueSource(ints = {0, 1, 2, 3})
+    public void betResultContainsCorrectAmountWhenBasketRouletteBetWins(int roll) throws IncorrectBetTypeException {
+        BetResult betResult = basketRouletteBet.getResult(roll);
 
         assertAll("betResult",
                 () -> assertEquals(3L, betResult.getBetId()),
-                () -> assertEquals(amount * SNAKE_ROULETTE_PAYOUT, betResult.getAmount())
+                () -> assertEquals(amount * BASKET_ROULETTE_PAYOUT, betResult.getAmount())
         );
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {0, 2, 3, 4, 6, 7, 8, 10, 11, 13, 15, 17, 18 ,20, 21, 22, 24, 25, 26, 28, 29, 31, 33, 35, 36})
-    public void betResultContainsZeroWhenSnakeRouletteBetLoses(int roll) throws IncorrectBetTypeException {
-
-        BetResult betResult = snakeRouletteBet.getResult(roll);
+    @ValueSource(ints = {4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 ,18 ,19 ,20, 21, 22, 23, 24, 25, 26, 27, 28, 28, 29, 30, 31, 32, 33, 34, 35, 36})
+    public void betResultContainsZeroWhenBasketRouletteBetLoses(int roll) throws IncorrectBetTypeException {
+        BetResult betResult = basketRouletteBet.getResult(roll);
 
         assertAll("betResult",
                 () -> assertEquals(3L, betResult.getBetId()),
                 () -> assertEquals(0, betResult.getAmount())
         );
     }
-
 
 }

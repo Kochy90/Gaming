@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
-class CommandToRouletteGameTypeConverterTest {
+class CommandToRouletteGameConverterTest {
 
     @Autowired
     CommandToRouletteGameConverter commandToRouletteGameConverter;

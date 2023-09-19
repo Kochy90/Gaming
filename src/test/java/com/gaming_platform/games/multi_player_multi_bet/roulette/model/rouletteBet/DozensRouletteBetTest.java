@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class DozensRouletteGameTypeBetTest {
+class DozensRouletteBetTest {
 
     Double amount;
     Long gameId, playerId, betId1, betId2, betId3;
@@ -31,7 +31,6 @@ class DozensRouletteGameTypeBetTest {
         dozensRouletteBetSecond = createDozensRouletteBet(gameId, playerId, betId2, amount, "SECOND");
         dozensRouletteBetThird = createDozensRouletteBet(gameId, playerId, betId3, amount, "THIRD");
     }
-
 
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ,11, 12})
@@ -96,7 +95,7 @@ class DozensRouletteGameTypeBetTest {
                 () -> assertEquals(betId2, betResultSecond.getBetId()),
                 () -> assertEquals(0d, betResultSecond.getAmount()),
                 () -> assertEquals(betId3, betResultThird.getBetId()),
-                () -> assertEquals(amount * DOZENS_ROULETTE_PAYOUT, betResultThird.getAmount())
+                () -> assertEquals(0, betResultThird.getAmount())
         );
     }
 

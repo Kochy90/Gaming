@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class RedBlackRouletteGameTypeBetTest {
+class RedBlackRouletteBetTest {
 
     Double amount;
     Bet redRouletteBet,blackRouletteBet;

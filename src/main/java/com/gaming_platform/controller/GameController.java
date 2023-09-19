@@ -32,14 +32,14 @@ public class GameController {
     @Autowired
     SinglePlayerSingleBetGameService singlePlayerSingleBetGameService;
 
-    @PostMapping("/mpmb/play")
+    @PostMapping("/multi-player-multi-bet/play")
     public ResponseEntity<MultiPlayerMultiBetGameResult> playGame(@RequestBody CreateMultiPlayerMultiBetGameCommand createGameCommand)
             throws NameNotFoundException, GameTypeNotConvertibleException, ValueOutOfBoundsException, InvalidFieldException, InvalidPlayerException {
         MultiPlayerMultiBetGameResult result = multiPlayerMultiBetGameService.playGame(createGameCommand);
         return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
     }
 
-    @PostMapping("/spsb/play")
+    @PostMapping("/single-player-single-bet/play")
     public ResponseEntity<SinglePlayerSingleBetGameResult> playGame(@RequestBody CreateSinglePlayerSingleBetGameCommand createGameCommand)
             throws NameNotFoundException, GameTypeNotConvertibleException, ValueOutOfBoundsException, InvalidFieldException, InvalidPlayerException {
         SinglePlayerSingleBetGameResult result = singlePlayerSingleBetGameService.playGame(createGameCommand);

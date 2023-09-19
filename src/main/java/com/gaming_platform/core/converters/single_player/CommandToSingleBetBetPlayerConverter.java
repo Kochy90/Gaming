@@ -6,7 +6,7 @@ import com.gaming_platform.core.model.bet.Bet;
 import com.gaming_platform.core.model.player.SingleBetPlayer;
 import com.gaming_platform.exceptions.InvalidPlayerException;
 
-public abstract class CommandToSingleBetPlayerConverter<T extends SingleBetPlayer<S>, S extends Bet> implements ISinglePlayerConverter<S> {
+public abstract class CommandToSingleBetBetPlayerConverter<T extends SingleBetPlayer<S>, S extends Bet> implements ISingleBetPlayerConverter<T> {
 
     @Override
     public T convertCommandToSingleBetPlayer(Long gameId, CreateSingleBetPlayerCommand playerCommand) throws InvalidPlayerException {

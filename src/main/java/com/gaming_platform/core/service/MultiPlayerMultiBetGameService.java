@@ -31,7 +31,7 @@ public class MultiPlayerMultiBetGameService<T extends MultiPlayerMultiBetGame<S,
 
     public MultiPlayerMultiBetGameResult playGame(CreateMultiPlayerMultiBetGameCommand createGameCommand)
             throws NameNotFoundException, GameTypeNotConvertibleException, ValueOutOfBoundsException, InvalidFieldException, InvalidPlayerException {
-        GameType gameType = validateAndReturnGame(createGameCommand.getGameName());
+        GameType gameType = validateAndReturnGame(createGameCommand.getGameType());
         T multiPlayerGame = convertCommandToGame(gameType, createGameCommand);
         IMultiPlayerMultiBetPlayable<T, S, U> playableService = allocateGameService(gameType);
         return playableService.play(multiPlayerGame);

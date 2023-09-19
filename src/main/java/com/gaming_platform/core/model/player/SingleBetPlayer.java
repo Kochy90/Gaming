@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class SingleBetPlayer<T extends Bet> {
+public abstract class SingleBetPlayer<T extends Bet> {
     private final Long playerId;
     private final T bet;
 }

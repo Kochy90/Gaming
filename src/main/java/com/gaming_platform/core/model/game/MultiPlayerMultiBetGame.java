@@ -10,7 +10,7 @@ import java.util.Random;
 
 @Getter
 @AllArgsConstructor
-public class MultiPlayerMultiBetGame<T extends MultiBetPlayer<S>, S extends Bet> {
+public abstract class MultiPlayerMultiBetGame<T extends MultiBetPlayer<S>, S extends Bet> {
     protected static final Random RANDOM = new Random();
     protected final Long gameId = RANDOM.nextLong();
     protected List<T> players;
