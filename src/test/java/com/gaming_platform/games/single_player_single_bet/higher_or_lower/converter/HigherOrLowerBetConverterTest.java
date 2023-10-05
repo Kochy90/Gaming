@@ -7,11 +7,8 @@ import com.gaming_platform.games.single_player_single_bet.higher_or_lower.model.
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static com.gaming_platform.UnitTestConstants.generateHigherOrLowerBetCommandBuilder;
@@ -19,11 +16,9 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-@ExtendWith(MockitoExtension.class)
 class HigherOrLowerBetConverterTest {
 
-    @Autowired
-    HigherOrLowerBetConverter betConverter;
+    HigherOrLowerBetConverter betConverter = new HigherOrLowerBetConverter();
 
     Long betId;
     Double betAmount;

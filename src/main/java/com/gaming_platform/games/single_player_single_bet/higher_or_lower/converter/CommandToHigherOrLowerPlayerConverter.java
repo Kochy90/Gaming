@@ -8,10 +8,12 @@ import com.gaming_platform.exceptions.InvalidPlayerException;
 import com.gaming_platform.exceptions.ValueOutOfBoundsException;
 import com.gaming_platform.games.single_player_single_bet.higher_or_lower.model.HigherOrLowerBet;
 import com.gaming_platform.games.single_player_single_bet.higher_or_lower.model.HigherOrLowerPlayer;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class CommandToHigherOrLowerPlayerConverter extends CommandToSingleBetBetPlayerConverter<HigherOrLowerPlayer, HigherOrLowerBet> {
 
     @Autowired

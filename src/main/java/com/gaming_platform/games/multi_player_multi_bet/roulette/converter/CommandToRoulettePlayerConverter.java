@@ -7,12 +7,14 @@ import com.gaming_platform.exceptions.InvalidFieldException;
 import com.gaming_platform.exceptions.InvalidPlayerException;
 import com.gaming_platform.games.multi_player_multi_bet.roulette.model.RoulettePlayer;
 import com.gaming_platform.games.multi_player_multi_bet.roulette.model.rouletteBet.RouletteBet;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class CommandToRoulettePlayerConverter extends CommandToMultiBetPlayerConverter<RoulettePlayer, RouletteBet> {
 
     @Autowired

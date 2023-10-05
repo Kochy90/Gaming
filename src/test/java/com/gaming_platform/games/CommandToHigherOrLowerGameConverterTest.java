@@ -7,35 +7,45 @@ import com.gaming_platform.core.model.game.GameType;
 import com.gaming_platform.exceptions.InvalidPlayerException;
 import com.gaming_platform.games.single_player_single_bet.higher_or_lower.converter.CommandToHigherOrLowerGameConverter;
 import com.gaming_platform.games.single_player_single_bet.higher_or_lower.converter.CommandToHigherOrLowerPlayerConverter;
+import com.gaming_platform.games.single_player_single_bet.higher_or_lower.model.HigherOrLowerBet;
 import com.gaming_platform.games.single_player_single_bet.higher_or_lower.model.HigherOrLowerGame;
 import com.gaming_platform.games.single_player_single_bet.higher_or_lower.model.HigherOrLowerPlayer;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static com.gaming_platform.UnitTestConstants.createHigherOrLowerGameCommandBuilder;
 import static com.gaming_platform.UnitTestConstants.generateHigherOrLowerBetCommandBuilder;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
 class CommandToHigherOrLowerGameConverterTest {
 
-    @Autowired
     CommandToHigherOrLowerGameConverter gameConverter;
 
     @Mock
     CommandToHigherOrLowerPlayerConverter playerConverter;
 
+    @BeforeEach
+    void setUp() {
+        gameConverter = new CommandToHigherOrLowerGameConverter(playerConverter);
+    }
+
+// TODO check implementation of Mock - can this be done better by using the generated GameId instead of the mocked one
     @Test
     void buildHigherOrLowerGameFromCommand() throws InvalidPlayerException {
-        Long playerId = 2L;
-        Long betId = 3L;
+        long playerId = 2L;
+        long betId = 3L;
         double betAmount = 50;
         int bet = 70;
+        long gameId = 2L;
 
         CreateBetCommand betCommand = generateHigherOrLowerBetCommandBuilder().id(betId).amount(betAmount).bet(bet).build();
         CreateSingleBetPlayerCommand playerCommand = new CreateSingleBetPlayerCommand(playerId, betCommand);
@@ -44,11 +54,12 @@ class CommandToHigherOrLowerGameConverterTest {
                 .createSingleBetPlayerCommand(playerCommand)
                 .build();
 
-        HigherOrLowerGame higherOrLowerGame = gameConverter.convert(gameCommand);
+        HigherOrLowerBet higherOrLowerBet = new HigherOrLowerBet(betId, playerId, gameId, betAmount, bet);
+        HigherOrLowerPlayer higherOrLowerPlayer = new HigherOrLowerPlayer(playerId, higherOrLowerBet);
 
-//        HigherOrLowerBet higherOrLowerBet = new HigherOrLowerBet(betId, playerId, higherOrLowerGame.getGameId(), betAmount, bet);
-//        HigherOrLowerPlayer higherOrLowerPlayer = new HigherOrLowerPlayer(playerId, higherOrLowerBet);
-//        Mockito.when(playerConverter.convertCommandToSingleBetPlayer(higherOrLowerGame.getGameId(), playerCommand)).thenReturn(higherOrLowerPlayer);
+        Mockito.when(playerConverter.convertCommandToSingleBetPlayer(anyLong(), any(CreateSingleBetPlayerCommand.class)))
+                .thenReturn(higherOrLowerPlayer);
+        HigherOrLowerGame higherOrLowerGame = gameConverter.convert(gameCommand);
 
         HigherOrLowerPlayer testPlayer = higherOrLowerGame.getPlayer();
 
