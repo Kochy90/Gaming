@@ -5,12 +5,15 @@ import com.gaming_platform.commands.CreateSingleBetPlayerCommand;
 import com.gaming_platform.exceptions.InvalidFieldException;
 import com.gaming_platform.exceptions.InvalidPlayerException;
 import com.gaming_platform.exceptions.ValueOutOfBoundsException;
+import com.gaming_platform.games.single_player_single_bet.higher_or_lower.model.HigherOrLowerBet;
 import com.gaming_platform.games.single_player_single_bet.higher_or_lower.model.HigherOrLowerPlayer;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static com.gaming_platform.UnitTestConstants.generateHigherOrLowerBetCommandBuilder;
@@ -21,11 +24,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(MockitoExtension.class)
 class CommandToHigherOrLowerPlayerConverterTest {
 
-    @Autowired
     CommandToHigherOrLowerPlayerConverter playerConverter;
 
-//    @Mock
-//    HigherOrLowerBetConverter betConverter;
+    @Mock
+    HigherOrLowerBetConverter betConverter;
+
+    @BeforeEach
+    void setUp() {
+        playerConverter = new CommandToHigherOrLowerPlayerConverter(betConverter);
+    }
 
     @Test
     void convertCommandToHigherOrLowerPlayerCompletesSuccessfully() throws ValueOutOfBoundsException, InvalidFieldException, InvalidPlayerException {
@@ -38,8 +45,8 @@ class CommandToHigherOrLowerPlayerConverterTest {
         CreateBetCommand createBetCommand = generateHigherOrLowerBetCommandBuilder().id(betId).amount(betAmount).bet(bet).build();
         CreateSingleBetPlayerCommand playerCommand = new CreateSingleBetPlayerCommand(playerId, createBetCommand);
 
-//        Mockito.when(betConverter.convertCommandToHigherOrLowerBet(gameId, playerId, createBetCommand)).thenReturn(
-//                new HigherOrLowerBet(betId, playerId, gameId, betAmount, bet));
+        Mockito.when(betConverter.convertCommandToHigherOrLowerBet(gameId, playerId, createBetCommand)).thenReturn(
+                new HigherOrLowerBet(betId, playerId, gameId, betAmount, bet));
         HigherOrLowerPlayer player = playerConverter.convertCommandToSingleBetPlayer(gameId, playerCommand);
 
         assertAll("player",

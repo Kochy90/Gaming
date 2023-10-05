@@ -29,5 +29,4 @@ public class IntegrationTestConstants {
         return createHigherOrLowerGameCommandBuilder().createSingleBetPlayerCommand(playerCommand).build();
     }
 
-
 }

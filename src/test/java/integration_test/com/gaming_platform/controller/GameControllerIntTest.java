@@ -44,10 +44,11 @@ public class GameControllerIntTest {
         CreateSingleBetPlayerCommand playerCommand = new CreateSingleBetPlayerCommand(new Random().nextLong(), betCommand);
         CreateSinglePlayerSingleBetGameCommand gameCommand = createHigherOrLowerGameCommandBuilder().createSingleBetPlayerCommand(playerCommand).build();
 
-        WebClient client = WebClient.create("http://localhost:" + port + "/game");
+        String rootUrl = "http://localhost:" + port + "/game";
+        WebClient.create(rootUrl);
 
         ResponseEntity<SinglePlayerSingleBetGameResult> responseEntity = this.restTemplate.postForEntity(
-        "http://localhost:" + port + "/single-player-single-bet/play",gameCommand, SinglePlayerSingleBetGameResult.class);
+                rootUrl + "/single-player-single-bet/play",gameCommand, SinglePlayerSingleBetGameResult.class);
 
         System.out.println(responseEntity.getStatusCode());
         System.out.println(responseEntity.getBody());
