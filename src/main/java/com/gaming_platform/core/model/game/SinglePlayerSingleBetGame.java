@@ -11,8 +11,7 @@ import java.util.Random;
 @AllArgsConstructor
 public abstract class SinglePlayerSingleBetGame<T extends SingleBetPlayer<S>, S extends Bet> {
     protected static final Random RANDOM = new Random();
-//    protected final Long gameId = RANDOM.nextLong();
-    protected final Long gameId = 2L;
+    protected final Long gameId = RANDOM.nextLong();
     protected T player;
     protected Integer roll;
 
