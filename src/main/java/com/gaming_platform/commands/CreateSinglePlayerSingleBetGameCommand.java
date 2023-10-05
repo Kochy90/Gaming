@@ -11,5 +11,4 @@ public class CreateSinglePlayerSingleBetGameCommand {
     private String gameType;
     private Long gameId;
     private CreateSingleBetPlayerCommand createSingleBetPlayerCommand;
-//    private Map<String, Object> gameVariables;
 }
