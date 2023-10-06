@@ -6,6 +6,7 @@ import com.gaming_platform.core.model.bet.Bet;
 import com.gaming_platform.core.model.game.GameType;
 import com.gaming_platform.core.model.game.MultiPlayerMultiBetGame;
 import com.gaming_platform.core.model.player.MultiBetPlayer;
+import com.gaming_platform.core.validators.IMultiPlayerMultiBetGameCommandValidatable;
 import com.gaming_platform.exceptions.GameTypeNotConvertibleException;
 import com.gaming_platform.exceptions.InvalidFieldException;
 import com.gaming_platform.exceptions.InvalidPlayerException;
@@ -29,12 +30,33 @@ public class MultiPlayerMultiBetGameService<T extends MultiPlayerMultiBetGame<S,
     @Autowired
     private List<IMultiPlayerMultiBetPlayable<T, S, U>> multiPlayerMultiBetPlayableServices;
 
+    @Autowired
+    private List<IMultiPlayerMultiBetGameCommandValidatable> multiPlayerMultiBetGameValidationServices;
+
     public MultiPlayerMultiBetGameResult playGame(CreateMultiPlayerMultiBetGameCommand createGameCommand)
             throws NameNotFoundException, GameTypeNotConvertibleException, ValueOutOfBoundsException, InvalidFieldException, InvalidPlayerException {
         GameType gameType = validateAndReturnGame(createGameCommand.getGameType());
+
+        validateCreateGameCommand(gameType, createGameCommand);
         T multiPlayerGame = convertCommandToGame(gameType, createGameCommand);
         IMultiPlayerMultiBetPlayable<T, S, U> playableService = allocateGameService(gameType);
+
         return playableService.play(multiPlayerGame);
+    }
+
+    private GameType validateAndReturnGame(String gameName) throws NameNotFoundException {
+        return Arrays.stream(GameType.values())
+                .filter(g -> g.name().equalsIgnoreCase(gameName))
+                .findFirst()
+                .orElseThrow(NameNotFoundException::new);
+    }
+
+    private void validateCreateGameCommand(GameType gameType, CreateMultiPlayerMultiBetGameCommand createGameCommand) throws GameTypeNotConvertibleException {
+        multiPlayerMultiBetGameValidationServices.stream()
+                .filter(service -> service.canValidate(gameType))
+                .findFirst()
+                .orElseThrow(GameTypeNotConvertibleException::new)
+                .validate(createGameCommand);
     }
 
     private T convertCommandToGame(GameType gameType, CreateMultiPlayerMultiBetGameCommand command)
@@ -51,13 +73,6 @@ public class MultiPlayerMultiBetGameService<T extends MultiPlayerMultiBetGame<S,
                 .filter(service -> service.canPlay(gameType))
                 .findFirst()
                 .orElseThrow(GameTypeNotConvertibleException::new);
-    }
-
-    private GameType validateAndReturnGame(String gameName) throws NameNotFoundException {
-        return Arrays.stream(GameType.values())
-                .filter(g -> g.name().equalsIgnoreCase(gameName))
-                .findFirst()
-                .orElseThrow(NameNotFoundException::new);
     }
 
 }

@@ -13,16 +13,13 @@ public abstract class CommandToMultiBetPlayerConverter<T extends MultiBetPlayer<
 
     @Override
     public T convertCommandToMultiBetPlayer(Long gameId, CreateMultiBetPlayerCommand playerCommand) throws InvalidPlayerException {
-        validatePlayerCommand(playerCommand);
         List<S> bets = playerCommand.getCreateBetCommands().stream()
-                .map((betCommand) -> generateBet(gameId, playerCommand.getPlayerId(), betCommand))
+                .map((betCommand) -> convertCommandToBet(gameId, playerCommand.getPlayerId(), betCommand))
                 .collect(Collectors.toList());
         return instantiateMultiBetPlayer(playerCommand.getPlayerId(), bets);
     }
 
-    protected abstract void validatePlayerCommand(CreateMultiBetPlayerCommand playerCommand) throws InvalidPlayerException;
-
-    protected abstract S generateBet(Long gameId, Long playerId, CreateBetCommand createBetCommand);
+    protected abstract S convertCommandToBet(Long gameId, Long playerId, CreateBetCommand createBetCommand);
 
     protected abstract T instantiateMultiBetPlayer(Long playerId, List<S> bets);
 
